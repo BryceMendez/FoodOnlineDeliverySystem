@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_orders"
+            android:icon="@drawable/ic_tracker"
+            android:title="My Orders" />
+        <item
+            android:id="@+id/nav_favorites"
+            android:icon="@drawable/ic_profilelink"
+            android:title="My Favorites" />
+        <item
+            android:id="@+id/nav_vouchers"
+            android:icon="@drawable/ic_voucher"
+            android:title="My Vouchers" />
+        <item
+            android:id="@+id/nav_legal"
+            android:icon="@drawable/ic_lock"
+            android:title="Legal Terms" />
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@drawable/ic_email"
+            android:title="Contact Us" />
+    </group>
+
+    <item android:title="Account">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_backblack"
+                android:title="Log out" />
+        </menu>
+    </item>
+</menu>

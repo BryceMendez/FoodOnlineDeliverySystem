@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Use 8 digits for transparency: #F2 (Alpha/Transparency) + White -->
+    <solid android:color="#F2FFFFFF" />
+
+    <!-- Increased width to 2dp to make it more visible -->
+    <stroke
+        android:width="2dp"
+        android:color="#A04040" />
+
+    <corners android:radius="12dp" />
+</shape>
