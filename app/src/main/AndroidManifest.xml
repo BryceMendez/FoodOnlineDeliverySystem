@@ -12,9 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyFirstApp"
         tools:targetApi="31">
-        <activity
-            android:name=".fragment_staff"
-            android:exported="false" />
         <!-- 1. THE LOGIN ACTIVITY (Starts First) -->
         <activity
             android:name=".Login"

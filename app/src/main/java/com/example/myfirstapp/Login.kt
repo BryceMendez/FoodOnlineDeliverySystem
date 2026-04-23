@@ -132,7 +132,7 @@ class Login : AppCompatActivity() {
 
         val fragment = when (role) {
             "admin" -> AdminFragment()
-            "staff" -> StaffFragment()
+            "staff" -> StaffDashboard()
             else -> {
                 // Regular user goes to MainActivity
                 startActivity(Intent(this, MainActivity::class.java))

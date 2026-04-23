@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_staff_orders"
+        android:icon="@drawable/ic_home"
+        android:title="Orders" />
+
+    <item
+        android:id="@+id/nav_staff_history"
+        android:icon="@drawable/ic_tracker"
+        android:title="History" />
+
+    <item
+        android:id="@+id/nav_staff_team"
+        android:icon="@drawable/ic_users"
+        android:title="Staff" />
+
+    <item
+        android:id="@+id/nav_staff_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings" />
+
+</menu>
