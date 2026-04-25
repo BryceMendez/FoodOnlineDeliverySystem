@@ -12,22 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyFirstApp"
         tools:targetApi="31">
-        <!-- 1. THE LOGIN ACTIVITY (Starts First) -->
+        <!-- Login Activity - Opens first when app launches -->
         <activity
             android:name=".Login"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- 2. THE MAIN ACTIVITY (The Home Page) -->
+        </activity>
+
+        <activity
+            android:name=".StaffActivity"
+            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-
-            <!-- No intent-filter here so it doesn't start first -->
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>

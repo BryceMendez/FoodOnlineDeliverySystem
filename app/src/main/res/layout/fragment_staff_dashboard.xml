@@ -1,164 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F6">
+    android:background="#F9F9F9">
 
-    <!-- ══ TOP BAR ══ -->
+    <!-- Tabs Row -->
     <LinearLayout
-        android:id="@+id/topBarDashboard"
-        android:layout_width="0dp"
-        android:layout_height="58dp"
+        android:id="@+id/tabRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="14dp"
-        android:paddingEnd="14dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="16dp"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:src="@drawable/ic_cart"
-            app:tint="#BE1028" />
-
         <TextView
+            android:id="@+id/chipNew"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="Downtown Branch"
-            android:textColor="#BE1028"
-            android:textSize="15sp"
+            android:background="@drawable/bg_staff_active_tab"
+            android:gravity="center"
+            android:text="New (8)"
+            android:textColor="#FFFFFF"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/ivConnectionStatus"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:src="@drawable/ic_cart"
-            app:tint="#BE1028" />
+        <TextView
+            android:id="@+id/chipPreparing"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:background="#FFEBEB"
+            android:gravity="center"
+            android:text="Preparing (4)"
+            android:textColor="#1A1A1A" />
+
+        <TextView
+            android:id="@+id/chipReady"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:background="#FFEBEB"
+            android:gravity="center"
+            android:text="Ready (3)"
+            android:textColor="#1A1A1A" />
     </LinearLayout>
 
-    <!-- ══ TAB FILTER ROW (reuses your existing drawables) ══ -->
-    <HorizontalScrollView
-        android:id="@+id/tabFilterScroll"
-        android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:background="#FFFFFF"
-        android:scrollbars="none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topBarDashboard">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingStart="14dp"
-            android:paddingEnd="14dp">
-
-            <TextView
-                android:id="@+id/chipCatAll"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:background="@drawable/bg_staff_active_tab"
-                android:gravity="center"
-                android:paddingStart="18dp"
-                android:paddingEnd="18dp"
-                android:text="New (8)"
-                android:textColor="#BE1028"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/chipCatIncoming"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/bg_staff_tab_container"
-                android:gravity="center"
-                android:paddingStart="18dp"
-                android:paddingEnd="18dp"
-                android:text="Preparing (4)"
-                android:textColor="#5E5E5E"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/chipCatPreparing"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/bg_staff_tab_container"
-                android:gravity="center"
-                android:paddingStart="18dp"
-                android:paddingEnd="18dp"
-                android:text="Ready (3)"
-                android:textColor="#5E5E5E"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/chipCatRider"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/bg_staff_tab_container"
-                android:gravity="center"
-                android:paddingStart="18dp"
-                android:paddingEnd="18dp"
-                android:text="Done (12)"
-                android:textColor="#5E5E5E"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </HorizontalScrollView>
-
-    <!-- ══ ORDER LIST ══ -->
+    <!-- Order List -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvOrders"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clipToPadding="false"
-        android:paddingStart="14dp"
-        android:paddingEnd="14dp"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        app:layout_constraintBottom_toTopOf="@id/staffBottomNav"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabFilterScroll" />
-
-    <!-- ══ FILTER FAB ══ -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabFilter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="#BE1028"
-        android:src="@drawable/ic_cart"
-        app:elevation="6dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@id/staffBottomNav"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="#FFFFFF" />
-
-    <!-- ══ BOTTOM NAV ══ -->
-    <include
-        android:id="@+id/staffBottomNav"
-        layout="@layout/include_staff_bottom_nav"
-        android:layout_width="0dp"
-        android:layout_height="84dp"
+        android:paddingVertical="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tabRow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

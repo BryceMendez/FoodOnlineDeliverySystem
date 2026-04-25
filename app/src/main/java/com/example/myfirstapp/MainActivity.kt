@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -22,61 +23,87 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize Views
-        drawerLayout = findViewById(R.id.drawer_layout)
-        bottomNav = findViewById(R.id.bottom_navigation)
+        drawerLayout     = findViewById(R.id.drawer_layout)
+        bottomNav        = findViewById(R.id.bottom_navigation)
         navigationDrawer = findViewById(R.id.navigation_drawer)
 
-        // Load user data into the sidebar header immediately
-        updateNavHeader()
+        val sharedPref = getSharedPreferences("UserSession", Context.MODE_PRIVATE)
+        val role = sharedPref.getString("user_role", "Customer")
 
-        // Set default fragment (Home)
-        if (savedInstanceState == null) {
-            replaceFragment(Home())
-            bottomNav.selectedItemId = R.id.nav_home
+        when (role) {
+            "Admin"  -> setupAdminUI()
+            "Staff"  -> setupStaffUI()
+            else     -> setupCustomerUI()
         }
 
-        // Bottom Navigation Click Listener
+        updateNavHeader()
+    }
+
+    // ── Customer ──────────────────────────────────────────────────────────────
+    private fun setupCustomerUI() {
+        bottomNav.menu.clear()
+        bottomNav.inflateMenu(R.menu.bottom_nav_menu)
+
+        replaceFragment(Home())
+
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_home -> replaceFragment(Home())
-                R.id.nav_menu -> replaceFragment(Menu())
+                R.id.nav_home     -> replaceFragment(Home())
+                R.id.nav_menu     -> replaceFragment(Menu())
                 R.id.nav_vouchers -> replaceFragment(Vouchers())
-                R.id.nav_tracker -> replaceFragment(Tracker())
+                R.id.nav_tracker  -> replaceFragment(Tracker())
             }
-            true
-        }
-
-        // Side Menu Click Listener
-        navigationDrawer.setNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_logout -> {
-                    // Clear session and go to Login
-                    val intent = Intent(this, Login::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                    finish()
-                }
-                // Handle other side menu items here if needed
-            }
-            drawerLayout.closeDrawer(GravityCompat.START)
             true
         }
     }
 
-    // Function to update Name and Email in the Side Menu
+    // ── Staff ─────────────────────────────────────────────────────────────────
+    private fun setupStaffUI() {
+        bottomNav.menu.clear()
+        bottomNav.inflateMenu(R.menu.staff_bottom_nav_menu)
+
+        replaceFragment(StaffDashboard())
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_staff_orders   -> replaceFragment(StaffDashboard())
+                R.id.nav_staff_history  -> replaceFragment(SelectRiderFragment())
+                R.id.nav_staff_profile  -> replaceFragment(StaffProfileSettingsFragment())
+                R.id.nav_staff_settings -> replaceFragment(StaffSettingsFragment())
+            }
+            true
+        }
+    }
+
+    // ── Admin ─────────────────────────────────────────────────────────────────
+    private fun setupAdminUI() {
+        bottomNav.menu.clear()
+        bottomNav.inflateMenu(R.menu.admin_bottom_nav_menu)
+
+        replaceFragment(AdminDashboard())
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_admin_dashboard  -> replaceFragment(AdminDashboard())
+                R.id.nav_admin_branches   -> replaceFragment(AdminBranches())
+                R.id.nav_admin_customers  -> replaceFragment(AdminCustomers())
+                R.id.nav_admin_analytics  -> replaceFragment(AdminAnalytics())
+            }
+            true
+        }
+    }
+
+    // ── Nav header ────────────────────────────────────────────────────────────
     private fun updateNavHeader() {
         val headerView: View = navigationDrawer.getHeaderView(0)
-        val tvNavName = headerView.findViewById<TextView>(R.id.nav_user_name)
+        val tvNavName  = headerView.findViewById<TextView>(R.id.nav_user_name)
         val tvNavEmail = headerView.findViewById<TextView>(R.id.nav_user_email)
 
-        // Fetch data saved during Login/Sign-up
         val sharedPref = getSharedPreferences("UserSession", Context.MODE_PRIVATE)
-        val savedName = sharedPref.getString("full_name", "Welcome Guest")
-        val savedEmail = sharedPref.getString("email_address", "Please sign in")
-
-        tvNavName.text = savedName
-        tvNavEmail.text = savedEmail
+        tvNavName.text  = sharedPref.getString("full_name", "Guest")
+        tvNavEmail.text = sharedPref.getString("email", "")
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -85,17 +112,7 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    // Called by Home Fragment to open the sidebar
     fun openDrawer() {
-        updateNavHeader() // Refresh info every time drawer opens
         drawerLayout.openDrawer(GravityCompat.START)
-    }
-
-    override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
     }
 }

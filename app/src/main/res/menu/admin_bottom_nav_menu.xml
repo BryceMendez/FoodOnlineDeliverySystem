@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_admin_dashboard"
+        android:icon="@drawable/ic_menu"
+        android:title="Dashboard" />
+
+    <item
+        android:id="@+id/nav_admin_branches"
+        android:icon="@drawable/ic_location"
+        android:title="Branches" />
+
+    <item
+        android:id="@+id/nav_admin_customers"
+        android:icon="@drawable/ic_person"
+        android:title="Customers" />
+
+    <item
+        android:id="@+id/nav_admin_analytics"
+        android:icon="@drawable/ic_tracker"
+        android:title="Analytics" />
+
+</menu>

@@ -9,6 +9,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:paddingBottom="40dp">
 
         <ImageButton
@@ -55,11 +57,9 @@
             android:textColor="#800000"
             android:textStyle="bold"
             android:padding="4dp"
-            app:layout_constraintBottom_toBottomOf="@id/tvSubtitle"
-            app:layout_constraintStart_toEndOf="@id/tvSubtitle"
-            app:layout_constraintTop_toTopOf="@id/tvSubtitle" />
+            app:layout_constraintBaseline_toBaselineOf="@id/tvSubtitle"
+            app:layout_constraintStart_toEndOf="@id/tvSubtitle" />
 
-        <!-- All EditTexts use textColor #000000 and the custom background -->
         <EditText
             android:id="@+id/etFirstName"
             android:layout_width="0dp"
@@ -72,6 +72,8 @@
             android:textColor="#000000"
             android:textColorHint="#999999"
             android:inputType="textPersonName"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             app:layout_constraintEnd_toStartOf="@+id/etLastName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvSubtitle" />
@@ -86,6 +88,8 @@
             android:textColor="#000000"
             android:textColorHint="#999999"
             android:inputType="textPersonName"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             app:layout_constraintBottom_toBottomOf="@+id/etFirstName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/etFirstName"
@@ -103,6 +107,8 @@
             android:textColor="#000000"
             android:textColorHint="#999999"
             android:inputType="textEmailAddress"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etFirstName" />
@@ -119,6 +125,8 @@
             android:textColor="#000000"
             android:textColorHint="#999999"
             android:inputType="phone"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etEmail" />
@@ -135,6 +143,8 @@
             android:textColor="#000000"
             android:textColorHint="#999999"
             android:inputType="textPassword"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etMobile" />
@@ -151,9 +161,38 @@
             android:textColor="#000000"
             android:textColorHint="#999999"
             android:inputType="textPassword"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etPassword" />
+
+        <!-- USER TYPE DROPDOWN -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilUserType"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            app:boxStrokeColor="#000000"
+            app:hintTextColor="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etConfirmPassword">
+
+            <AutoCompleteTextView
+                android:id="@+id/actvUserType"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/edittext_custom"
+                android:hint="I am a..."
+                android:inputType="none"
+                android:padding="12dp"
+                android:textColor="#000000"
+                android:textColorHint="#999999" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <RadioButton
             android:id="@+id/rbTerms"
@@ -167,7 +206,7 @@
             android:buttonTint="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etConfirmPassword" />
+            app:layout_constraintTop_toBottomOf="@id/tilUserType" />
 
         <Button
             android:id="@+id/btnNext"
@@ -177,14 +216,13 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="24dp"
             android:backgroundTint="#800000"
-            android:text="Next"
+            android:text="Create Account"
             android:textColor="#FFFFFF"
             app:cornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rbTerms" />
 
-        <!-- "OR LOGIN WITH" SECTION -->
         <View
             android:id="@+id/viewLineLeft"
             android:layout_width="0dp"
@@ -221,7 +259,6 @@
             app:layout_constraintStart_toEndOf="@+id/tvOrLogin"
             app:layout_constraintTop_toTopOf="@+id/tvOrLogin" />
 
-        <!-- SOCIAL ICONS -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -247,7 +284,6 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_google" />
-
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
